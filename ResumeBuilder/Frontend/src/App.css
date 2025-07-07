@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+
+
+/* 🌿 Classic */
+/* 🌑 Eclipse */
+.theme-eclipse {
+  --color-bg: #0f172a;
+  --color-header: linear-gradient(to right, #1e3a8a, #475569);
+  --color-name: #f8fafc;
+  --color-role: #93c5fd;
+  --color-contact: #cbd5e1;
+  --color-text: #e2e8f0;
+  --color-subheading: rgba(255, 255, 255, 0.1);
+  --glass: rgba(255, 255, 255, 0.05);
+}
+
+/* ☀️ Solar Gold */
+.theme-solar {
+  --color-bg: #fef9c3;
+  --color-header: linear-gradient(to right, #facc15, #fde68a);
+  --color-name: #78350f;
+  --color-role: #ca8a04;
+  --color-contact: #92400e;
+  --color-text: #1c1917;
+  --color-subheading: rgba(250, 204, 21, 0.2);
+  --glass: rgba(255, 255, 255, 0.4);
+}
+
+/* 🫧 Glacier */
+.theme-glacier {
+  --color-bg: #f0f9ff;
+  --color-header: linear-gradient(to right, #0ea5e9, #7dd3fc);
+  --color-name: #0369a1;
+  --color-role: #0284c7;
+  --color-contact: #0ea5e9;
+  --color-text: #1e293b;
+  --color-subheading: rgba(186, 230, 253, 0.5);
+  --glass: rgba(255, 255, 255, 0.3);
+}
+
+/* 🌺 Flamingo */
+.theme-flamingo {
+  --color-bg: #fff1f2;
+  --color-header: linear-gradient(to right, #fda4af, #f43f5e);
+  --color-name: #881337;
+  --color-role: #e11d48;
+  --color-contact: #be123c;
+  --color-text: #4b5563;
+  --color-subheading: rgba(252, 165, 165, 0.3);
+  --glass: rgba(255, 255, 255, 0.4);
+}
+
+/* 🌲 Evergreen */
+.theme-evergreen {
+  --color-bg: #f0fdf4;
+  --color-header: linear-gradient(to right, #10b981, #34d399);
+  --color-name: #064e3b;
+  --color-role: #10b981;
+  --color-contact: #047857;
+  --color-text: #1e293b;
+  --color-subheading: rgba(167, 243, 208, 0.3);
+  --glass: rgba(255, 255, 255, 0.5);
+}
+
+/* 🦄 Aurora */
+.theme-aurora {
+  --color-bg: #f5f3ff;
+  --color-header: linear-gradient(to right, #c084fc, #a855f7);
+  --color-name: #6b21a8;
+  --color-role: #9333ea;
+  --color-contact: #7c3aed;
+  --color-text: #4b5563;
+  --color-subheading: rgba(216, 180, 254, 0.3);
+  --glass: rgba(255, 255, 255, 0.4);
+}
+
+/* 🪐 Nebula */
+.theme-nebula {
+  --color-bg: #020617;
+  --color-header: linear-gradient(to right, #4f46e5, #9333ea);
+  --color-name: #fef3c7;
+  --color-role: #c084fc;
+  --color-contact: #e0e7ff;
+  --color-text: #cbd5e1;
+  --color-subheading: rgba(147, 51, 234, 0.15);
+  --glass: rgba(255, 255, 255, 0.05);
+}
+
+/* 🧋 Mocha */
+.theme-mocha {
+  --color-bg: #fafaf9;
+  --color-header: linear-gradient(to right, #d6d3d1, #f5f5f4);
+  --color-name: #3f3f46;
+  --color-role: #78716c;
+  --color-contact: #52525b;
+  --color-text: #292524;
+  --color-subheading: rgba(113, 113, 122, 0.2);
+  --glass: rgba(255, 255, 255, 0.6);
+}
+
+/* 🌸 Sakura */
+.theme-sakura {
+  --color-bg: #fff7fb;
+  --color-header: linear-gradient(to right, #fbcfe8, #f9a8d4);
+  --color-name: #be185d;
+  --color-role: #ec4899;
+  --color-contact: #f43f5e;
+  --color-text: #831843;
+  --color-subheading: rgba(253, 164, 175, 0.3);
+  --glass: rgba(255, 255, 255, 0.4);
+}
+
+/* 🔮 Mirage */
+.theme-mirage {
+  --color-bg: #1e1b4b;
+  --color-header: linear-gradient(to right, #7c3aed, #6d28d9);
+  --color-name: #c4b5fd;
+  --color-role: #d8b4fe;
+  --color-contact: #ddd6fe;
+  --color-text: #e0e7ff;
+  --color-subheading: rgba(192, 132, 252, 0.2);
+  --glass: rgba(255, 255, 255, 0.08);
+}
