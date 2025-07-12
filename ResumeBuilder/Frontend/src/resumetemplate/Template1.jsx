@@ -1,152 +1,237 @@
 import React from "react";
-import resumeData from "./resumedata";
-
-const Template1 = () => {
+import resumeDataDefault from "./resumeDataDefault";
+import { BiCalendar } from "react-icons/bi";
+import { FaCalendar, FaLocationPin } from "react-icons/fa6";
+const definer = () => {
+  return {
+    Name: String,
+    Role: String,
+    Contact: Object,
+    Achievements: Object,
+    Projects: Object,
+    Education: Object,
+    Experience: Object,
+    Skills: Array,
+    Summary: String,
+    Strengths: Object,
+  };
+};
+const Template1 = ({
+  theme = "formal",
+  resumeData = {
+    ...definer,
+  },
+}) => {
   const {
-    name,
-    title,
-    contact,
-    summary,
-    experience,
-    education,
-    skills,
-    software,
-    certifications,
+    Name,
+    Role,
+    Contact,
+    Achievements,
+    Education,
+    Experience,
+    Projects,
+    Skills,
+    Summary,
+    Strengths,
   } = resumeData;
 
   return (
     <div
-      className="theme-eclipse max-w-5xl mx-auto min-h-screen font-sans px-6 py-12"
-      style={{
-        backgroundColor: "var(--color-bg)",
-        color: "var(--color-text)",
-      }}
+      className={`w-6xl text-[var(--color-text)] font-sans min-h-screen flex flex-col  theme-${theme} bg-[var(--color-bg)] `}
     >
-      <div
-        className="w-full mx-auto p-6 rounded-xl shadow-xl"
-        style={{
-          background: "var(--glass)",
-          backdropFilter: "blur(12px)",
-        }}
-      >
-        {/* Header */}
-        <div
-          className="mb-8 p-6 rounded-lg shadow"
-          style={{ background: "var(--color-header)" }}
-        >
-          <h1
-            className="text-4xl font-bold font-mono tracking-tight"
-            style={{ color: "var(--color-name)" }}
-          >
-            {name}
-          </h1>
-          <p
-            className="text-lg font-semibold"
-            style={{ color: "var(--color-role)" }}
-          >
-            {title}
-          </p>
-          <div
-            className="flex flex-wrap justify-between mt-4 text-sm"
-            style={{ color: "var(--color-contact)" }}
-          >
-            <div>
-              <p><strong>Phone:</strong> {contact.phone}</p>
-              <p><strong>Email:</strong> {contact.email}</p>
+      <h1 className="text-3xl text-[var(--color-heading)] uppercase font-sans font-[500] tracking-tight">
+        {Name ?? resumeDataDefault.Name}
+      </h1>
+      <p className="text-[var(--color-secondary)] mt-1 text-sm font-semibold">
+        {Role ?? resumeDataDefault.Role}
+      </p>
+      <div className="flex gap-7 mt-4 text-sm font-bold">
+        {Object.entries(Contact ?? resumeDataDefault.Contact).map(
+          ([key, value], index) => {
+            if (key == "Phone")
+              return (
+                <span title={key} key={index}>
+                  {value}
+                </span>
+              );
+            else if (key == "Portfolio")
+              return (
+                <a href={value} key={index} target="_blank">
+                  {key}
+                </a>
+              );
+            return (
+              <a
+                href={key == "Gmail" ? `mailto:${value}` : value}
+                title={key}
+                key={index}
+              >
+                {value}
+              </a>
+            );
+          }
+        )}
+      </div>
+      <div className="flex-1 flex gap-19 mt-5">
+        <div className="flex-1 space-y-5">
+          <div className="">
+            <div className="text-2xl tracking-tight font-noramal  pb-1 uppercase border-b-4 text-[var(--color-heading)]">
+              Summary
+            </div>
+            <p className="w-full text-sm leading-tight font-medium mt-3 ">
+              {Summary ?? resumeDataDefault.Summary}
+            </p>
+          </div>
+          <div className="">
+            <div className="text-2xl tracking-tight font-noramal pb-1 uppercase border-b-4 text-[var(--color-heading)]">
+              Experiences
+            </div>
+            <div className="px-1">
+              {Object.entries(Experience ?? resumeDataDefault.Experience).map(
+                ([key, value], index) => (
+                  <div
+                    className="mt-4 font-semibold pb-4 border-b border-dashed"
+                    key={index}
+                  >
+                    <h1 className="text-lg text-[var(--color-secondary)] font-bold">
+                      {key}
+                    </h1>
+                    <p className="text-[var(--color-comment)] text-xs">
+                      {value.role}
+                    </p>
+                    <p className="text-sm text-[var(--color-text)] leading-tight mt-1 ml-1 ">
+                      {value.tagline}
+                    </p>
+                    <ol className="space-y-1 mt-2 list-disc">
+                      {value.Bullets.map((item, index) => (
+                        <li
+                          className="text-sm leading-tight  ml-2  "
+                          key={index}
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+          <div className="">
+            <div className="text-2xl tracking-tight   font-noramal font-sans pb-1 uppercase border-b-4 text-[var(--color-heading)]">
+              Education
             </div>
             <div>
-              <p><strong>LinkedIn:</strong> {contact.linkedin}</p>
-              <p><strong>Twitter:</strong> {contact.twitter}</p>
+              {Object.entries(Education ?? resumeDataDefault.Education).map(
+                ([key, value], index) => (
+                  <div className="pb-3 border-b border-dashed mt-2" key={index}>
+                    <h2 className="text-[var(--color-heading)] tracking-tight text-lg">
+                      {key}
+                    </h2>
+                    <p className="text-[var(--color-secondary)] text-sm mb-1 font-bold font-sans ml-1">
+                      {value.Origin}
+                    </p>
+                    <div className="flex gap-3">
+                      {" "}
+                      <p className="ml-1 text-sm flex  items-center  gap-1 ">
+                        <BiCalendar size={14} />
+                        {value.StartDate} - {value.EndDate}
+                      </p>
+                      <p className="ml-1 text-sm flex  items-center  gap-1 ">
+                        <FaLocationPin size={14} />
+                        {value.Loaction}
+                      </p>
+                    </div>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
-
-        {/* Generic Section Block */}
-        {[
-          { title: "Summary", content: <p className="leading-relaxed">{summary}</p> },
-          {
-            title: "Experience",
-            content: experience.map((job, idx) => (
-              <div key={idx} className="mb-6">
-                <p className="text-sm font-semibold">{job.date}</p>
-                <h3 className="text-lg font-bold">{job.role}</h3>
-                <p className="italic">{job.company}</p>
-                <ul className="list-disc list-inside mt-2 space-y-1 text-sm">
-                  {job.achievements.map((point, i) => (
-                    <li key={i}>{point}</li>
-                  ))}
-                </ul>
-              </div>
-            )),
-          },
-          {
-            title: "Education",
-            content: (
-              <>
-                <p className="text-sm font-semibold">{education.date}</p>
-                <p className="font-bold">
-                  {education.degree}, {education.institution}
-                </p>
-                <ul className="list-disc list-inside mt-2 text-sm space-y-1">
-                  {education.details.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              </>
-            ),
-          },
-          {
-            title: "Skills",
-            content: (
-              <ul className="list-disc list-inside text-sm space-y-1">
-                {skills.map((skill, i) => (
-                  <li key={i}>
-                    <strong>{skill.name}</strong> – {skill.description}
-                  </li>
-                ))}
-              </ul>
-            ),
-          },
-          {
-            title: "Software",
-            content: (
-              <ul className="text-sm space-y-1">
-                {software.map((item, i) => (
-                  <li key={i}>
-                    {item.name}{" "}
-                    <span className="ml-4 text-gray-500">
-                      {"●".repeat(Math.floor(item.rating))}
-                      {item.rating % 1 !== 0 && "◐"} {item.level}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            ),
-          },
-          {
-            title: "Certifications",
-            content: (
-              <ul className="text-sm">
-                {certifications.map((cert, i) => (
-                  <li key={i}>
-                    <strong>{cert.date}</strong> – {cert.title},{" "}
-                    {cert.organization}
-                  </li>
-                ))}
-              </ul>
-            ),
-          },
-        ].map((block, index) => (
-          <section key={index} className="mb-10">
-            <div
-              className="px-2 py-1 rounded mb-3 inline-block"
-              style={{ backgroundColor: "var(--color-subheading)" }}
-            >
-              <h2 className="text-xl font-bold font-mono">{block.title}</h2>
+        <div className="w-[45%] space-y-5">
+          <div>
+            <div className="text-2xl tracking-tight font-noramal font-sans pb-1 uppercase border-b-4 text-[var(--color-heading)]">
+              Key Achievements
             </div>
-            {block.content}
-          </section>
-        ))}
+            <div>
+              {Object.entries(
+                Achievements ?? resumeDataDefault.Achievements
+              ).map(([key, value], index) => (
+                <div key={index} className="border-b pb-4 border-dashed">
+                  <div className="text-[var(--color-heading)] font-semibold">
+                    <div className="border border-[var(--color-highlighting)] w-4 h-4 mr-3 translate-y-6 inline-block" />
+                    {key}
+                  </div>
+                  <p className="leading-tight ml-10 text-sm font-semibold">
+                    {value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="text-2xl tracking-tight font-noramal font-sans pb-1 uppercase border-b-4 text-[var(--color-heading)]">
+              Projects
+            </div>
+            <div className="w-full pl-2">
+              {Object.entries(Projects ?? resumeDataDefault.Projects).map(
+                ([key, value], index) => (
+                  <div key={index} className="border-b border-dashed pb-4 mt-3">
+                    <h1 className="text-[var(--color-heading)] font-semibold ">
+                      {key}
+                    </h1>
+                    <p className="flex items-center gap-3 text-xs ml-2">
+                      <FaCalendar size={14} />
+                      {value.StartDate} - {value.EndDate}
+                    </p>
+                    <p className="ml-2 text-sm  font-semibold mt-2">
+                      {value.Tagline}
+                    </p>
+                    <ul className="list-disc ml-2 text-sm font-semibold">
+                      {value.Bullets.map((value, index) => (
+                        <li key={index}>{value}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+          <div>
+            <div className="text-2xl tracking-tight font-noramal font-sans pb-1 uppercase border-b-4 text-[var(--color-heading)]">
+              Skills
+            </div>
+            <div className="w-full flex flex-wrap gap-2 px-2 justify-evenly">
+              {(Skills ?? resumeDataDefault.Skills).map((skill, index) => (
+                <span key={index} className="px-2 py-2  whitespace-nowrap border-b-2 font-semibold text-sm">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="text-2xl tracking-tight font-normal font-sans pb-1 uppercase border-b-4 text-[var(--color-heading)]">
+              Strengths
+            </div>
+            <div className="w-full space-y-0.5 pt-2">
+              {Object.entries(Strengths ?? resumeDataDefault.Strengths).map(
+                ([title, description], index) => (
+                  <div
+                    key={index}
+                    className="px-2 border-b border-dashed pb-3"
+                  >
+                    <h4 className=" font-semibold text-[var(--color-heading)] mb-1">
+                      {title}
+                    </h4>
+                    <p className="font-semibold text-sm">
+                      {description}
+                    </p>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

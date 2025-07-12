@@ -1,198 +1,222 @@
 import React from "react";
-import { FaPhone, FaEnvelope, FaLinkedin, FaTwitter } from "react-icons/fa";
-import resumeData from "./resumedata";
+import resumeDataDefault from "./resumeDataDefault";
+import { BiCalendar, BiEnvelope, BiPhone, BiWorld } from "react-icons/bi";
+import { FaGithub, FaLocationPin } from "react-icons/fa6";
 
-const Template2 = () => {
+const definer = () => {
+  return {
+    Name: String,
+    Role: String,
+    Contact: Object,
+    Achievements: Object,
+    Projects: Object,
+    Education: Object,
+    Experience: Object,
+    Skills: Array,
+    Summary: String,
+    Strengths: Object,
+  };
+};
+
+const Template2 = ({
+  theme = "minimal",
+  resumeData = {
+    ...definer,
+  },
+}) => {
   const {
-    name,
-    role,
-    photo,
-    contact,
-    summary,
-    experience,
-    education,
-    skills,
-    software,
-    certifications,
-    projects,
+    Name,
+    Role,
+    Contact,
+    Achievements,
+    Education,
+    Experience,
+    Projects,
+    Skills,
+    Summary,
+    Strengths,
   } = resumeData;
 
+  const getContactIcon = (key) => {
+    switch (key) {
+      case "Phone": return <BiPhone size={16} />;
+      case "Gmail": return <BiEnvelope size={16} />;
+      case "Github": return <FaGithub size={16} />;
+      case "Portfolio": return <BiWorld size={16} />;
+      default: return <BiWorld size={16} />;
+    }
+  };
+
   return (
-    <div
-      className="theme-glacier max-w-6xl mx-auto flex min-h-screen font-sans shadow-2xl rounded-lg overflow-hidden"
-      style={{
-        backgroundColor: "var(--color-bg)",
-        color: "var(--color-text)",
-      }}
-    >
+    <div className={`w-6xl mx-auto font-sans min-h-screen flex theme-${theme} bg-[var(--color-bg)]`}>
       {/* Sidebar */}
-      <aside
-        className="w-1/4 p-6 text-sm flex flex-col items-center gap-4 backdrop-blur-lg"
-        style={{
-          background: "var(--glass)",
-        }}
-      >
-        {/* Profile Image */}
-        {photo && (
-          <img
-            src={photo}
-            alt={`${name}'s profile`}
-            className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
-          />
-        )}
-        <h1
-          className="text-xl font-bold text-center tracking-tight"
-          style={{ color: "var(--color-name)" }}
-        >
-          {name}
-        </h1>
-        <p
-          className="text-center font-medium"
-          style={{ color: "var(--color-role)" }}
-        >
-          {role}
-        </p>
+      <div className="w-80 bg-[var(--color-sidebar)] p-8 flex flex-col">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-bold text-[var(--color-heading)] mb-2">
+            {Name ?? resumeDataDefault.Name}
+          </h1>
+          <p className="text-[var(--color-secondary)] font-medium">
+            {Role ?? resumeDataDefault.Role}
+          </p>
+        </div>
 
         {/* Contact */}
-        <div
-          className="mt-4 space-y-2 text-sm w-full"
-          style={{ color: "var(--color-contact)" }}
-        >
-          <p className="flex items-center gap-2">
-            <FaPhone /> {contact.phone}
-          </p>
-          <p className="flex items-center gap-2">
-            <FaEnvelope /> {contact.email}
-          </p>
-          <p className="flex items-center gap-2">
-            <FaLinkedin /> {contact.linkedin}
-          </p>
-          <p className="flex items-center gap-2">
-            <FaTwitter /> {contact.twitter}
-          </p>
+        <div className="mb-8">
+          <h2 className="text-lg font-semibold text-[var(--color-heading)] mb-4 border-b-2 border-[var(--color-highlighting)] pb-2">
+            CONTACT
+          </h2>
+          <div className="space-y-3">
+            {Object.entries(Contact ?? resumeDataDefault.Contact).map(([key, value], index) => (
+              <div key={index} className="flex items-center gap-3 text-sm">
+                {getContactIcon(key)}
+                {key === "Phone" ? (
+                  <span className="text-[var(--color-text)]">{value}</span>
+                ) : (
+                  <a
+                    href={key === "Gmail" ? `mailto:${value}` : value}
+                    className="text-[var(--color-text)] hover:text-[var(--color-secondary)] break-all"
+                  >
+                    {value}
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Skills */}
-        <div className="mt-6 w-full">
-          <h2
-            className="text-sm font-bold mb-2 px-2 py-1 rounded"
-            style={{ backgroundColor: "var(--color-subheading)" }}
-          >
-            Skills
+        <div className="mb-8">
+          <h2 className="text-lg font-semibold text-[var(--color-heading)] mb-4 border-b-2 border-[var(--color-highlighting)] pb-2">
+            SKILLS
           </h2>
-          <ul className="space-y-2 pl-2">
-            {skills.map((skill, i) => (
-              <li key={i} className="text-sm">
-                • {skill.name}
-              </li>
+          <div className="space-y-2">
+            {(Skills ?? resumeDataDefault.Skills).map((skill, index) => (
+              <div key={index} className="bg-[var(--color-bg)] px-3 py-2 rounded text-sm font-medium text-[var(--color-text)]">
+                {skill}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
-      </aside>
+
+        {/* Strengths */}
+        <div>
+          <h2 className="text-lg font-semibold text-[var(--color-heading)] mb-4 border-b-2 border-[var(--color-highlighting)] pb-2">
+            STRENGTHS
+          </h2>
+          <div className="space-y-4">
+            {Object.entries(Strengths ?? resumeDataDefault.Strengths).map(([title, description], index) => (
+              <div key={index}>
+                <h3 className="font-semibold text-[var(--color-heading)] mb-1 text-sm">{title}</h3>
+                <p className="text-xs text-[var(--color-text)] leading-relaxed">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Main Content */}
-      <main className="w-3/4 p-8 space-y-10">
+      <div className="flex-1 p-8 text-[var(--color-text)]">
         {/* Summary */}
-        <section>
-          <h2
-            className="text-xl font-bold mb-2 px-2 py-1 rounded inline-block"
-            style={{ backgroundColor: "var(--color-subheading)" }}
-          >
-            Summary
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold text-[var(--color-heading)] mb-4 border-b-2 border-[var(--color-highlighting)] pb-2">
+            PROFESSIONAL SUMMARY
           </h2>
-          <p className="px-5">{summary}</p>
-        </section>
+          <p className="text-sm leading-relaxed">
+            {Summary ?? resumeDataDefault.Summary}
+          </p>
+        </div>
 
         {/* Experience */}
-        <section>
-          <h2
-            className="text-xl font-bold mb-2 px-2 py-1 rounded inline-block"
-            style={{ backgroundColor: "var(--color-subheading)" }}
-          >
-            Experience
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold text-[var(--color-heading)] mb-4 border-b-2 border-[var(--color-highlighting)] pb-2">
+            EXPERIENCE
           </h2>
-          {experience.map((job, i) => (
-            <div key={i} className="mb-4 px-5">
-              <h3 className="font-bold text-lg">{job.role}</h3>
-              <p className="italic text-sm">
-                {job.company} – {job.date}
-              </p>
-              <ul className="list-disc list-inside mt-2 text-sm">
-                {job.achievements.map((point, j) => (
-                  <li key={j}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </section>
+          <div className="space-y-6">
+            {Object.entries(Experience ?? resumeDataDefault.Experience).map(([key, value], index) => (
+              <div key={index} className="border-l-4 border-[var(--color-highlighting)] pl-4">
+                <h3 className="text-lg font-semibold text-[var(--color-secondary)]">{key}</h3>
+                <p className="text-[var(--color-comment)] text-sm font-medium">{value.role}</p>
+                <p className="text-sm mt-2 font-medium">{value.tagline}</p>
+                <ul className="mt-3 space-y-1">
+                  {value.Bullets.map((bullet, bulletIndex) => (
+                    <li key={bulletIndex} className="text-sm flex items-start gap-2">
+                      <span className="text-[var(--color-highlighting)] mt-1">•</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Projects */}
-        <section>
-          <h2
-            className="text-xl font-bold mb-2 px-2 py-1 rounded inline-block"
-            style={{ backgroundColor: "var(--color-subheading)" }}
-          >
-            Projects
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold text-[var(--color-heading)] mb-4 border-b-2 border-[var(--color-highlighting)] pb-2">
+            PROJECTS
           </h2>
-          {projects.map((project, i) => (
-            <div key={i} className="mb-4 px-5">
-              <h3 className="font-semibold">{project.title}</h3>
-              <p className="text-sm italic mb-1">
-                {project.tech.join(", ")}
-              </p>
-              <p className="text-sm">{project.description}</p>
-              {project.link && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  className="text-blue-500 text-sm underline"
-                >
-                  View Project →
-                </a>
-              )}
-            </div>
-          ))}
-        </section>
+          <div className="space-y-6">
+            {Object.entries(Projects ?? resumeDataDefault.Projects).map(([key, value], index) => (
+              <div key={index} className="border-l-4 border-[var(--color-highlighting)] pl-4">
+                <h3 className="text-lg font-semibold text-[var(--color-secondary)]">{key}</h3>
+                <p className="text-xs text-[var(--color-comment)] flex items-center gap-1 mt-1">
+                  <BiCalendar size={12} />
+                  {value.StartDate} - {value.EndDate}
+                </p>
+                <p className="text-sm mt-2 font-medium">{value.Tagline}</p>
+                <ul className="mt-3 space-y-1">
+                  {value.Bullets.map((bullet, bulletIndex) => (
+                    <li key={bulletIndex} className="text-sm flex items-start gap-2">
+                      <span className="text-[var(--color-highlighting)] mt-1">•</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Education */}
-        <section>
-          <h2
-            className="text-xl font-bold mb-2 px-2 py-1 rounded inline-block"
-            style={{ backgroundColor: "var(--color-subheading)" }}
-          >
-            Education
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold text-[var(--color-heading)] mb-4 border-b-2 border-[var(--color-highlighting)] pb-2">
+            EDUCATION
           </h2>
-          <div className="px-5 text-sm">
-            <p className="font-semibold">{education.date}</p>
-            <p className="font-bold">
-              {education.degree}, {education.institution}
-            </p>
-            <ul className="list-disc list-inside mt-2">
-              {education.details.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* Certifications */}
-        <section>
-          <h2
-            className="text-xl font-bold mb-2 px-2 py-1 rounded inline-block"
-            style={{ backgroundColor: "var(--color-subheading)" }}
-          >
-            Certifications
-          </h2>
-          <ul className="text-sm px-5">
-            {certifications.map((cert, i) => (
-              <li key={i}>
-                <strong>{cert.date}</strong> – {cert.title},{" "}
-                {cert.organization}
-              </li>
+          <div className="space-y-4">
+            {Object.entries(Education ?? resumeDataDefault.Education).map(([key, value], index) => (
+              <div key={index} className="border-l-4 border-[var(--color-highlighting)] pl-4">
+                <h3 className="text-lg font-semibold text-[var(--color-secondary)]">{key}</h3>
+                <p className="text-sm font-medium text-[var(--color-text)]">{value.Origin}</p>
+                <div className="flex gap-4 mt-2 text-xs text-[var(--color-comment)]">
+                  <span className="flex items-center gap-1">
+                    <BiCalendar size={12} />
+                    {value.StartDate} - {value.EndDate}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FaLocationPin size={12} />
+                    {value.Loaction}
+                  </span>
+                </div>
+              </div>
             ))}
-          </ul>
-        </section>
-      </main>
+          </div>
+        </div>
+
+        {/* Achievements */}
+        <div>
+          <h2 className="text-2xl font-semibold text-[var(--color-heading)] mb-4 border-b-2 border-[var(--color-highlighting)] pb-2">
+            KEY ACHIEVEMENTS
+          </h2>
+          <div className="space-y-4">
+            {Object.entries(Achievements ?? resumeDataDefault.Achievements).map(([key, value], index) => (
+              <div key={index} className="border-l-4 border-[var(--color-highlighting)] pl-4">
+                <h3 className="font-semibold text-[var(--color-secondary)]">{key}</h3>
+                <p className="text-sm mt-1">{value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
