@@ -15,12 +15,15 @@ const App = () => {
 
 
   return (
-    <div className='w-screen   '>
+    <div className='w-screen  relative h-fit'>
      
     <Navbar />
+   
+
     <Routes >
       <Route path='/' element={<Home/>}/>
     </Routes>
+    
    
   
     </div>

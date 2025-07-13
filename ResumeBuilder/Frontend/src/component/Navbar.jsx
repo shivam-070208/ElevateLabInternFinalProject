@@ -14,7 +14,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="relative z-50">
+    <div className="z-[999] fixed w-screen top-0 ">
       {/* Top Navbar */}
       <div className="w-full px-4 md:px-8 flex justify-between items-center py-5">
         <div className="text-4xl">

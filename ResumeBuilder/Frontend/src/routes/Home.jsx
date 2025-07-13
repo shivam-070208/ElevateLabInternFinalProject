@@ -8,7 +8,7 @@ import Testimonials from '../component/Testimonials';
 import Footer from '../component/Footer';
 import LocomotiveScroll from 'locomotive-scroll';
 import { Cursor } from '../ui';
-
+import 'locomotive-scroll/dist/locomotive-scroll.css'
 
 
 
@@ -19,15 +19,19 @@ const Home = () => {
     if(!scrollref.current) return;
 
     const loco = new LocomotiveScroll({
-      lenisOptions:{
-        wrapper:scrollref.current,
-        smoothWheel:true
-      }
+       lenisOptions: {
+        wrapper: scrollref.current,
+     
+        duration:1.2,
+        normalizeWheel: true,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      
+    }
     })
   },[scrollref])
 
   return (
-    <div ref={scrollref} className='scroll-container' >
+    <div ref={scrollref} className='w-screen h-screen ' data-scroll-container >
      
       <Heroic />
       <Features />

@@ -51,7 +51,7 @@ const mousemove = (e) => {
     });
 };
   return (
-    <div onMouseEnter={mouseenter} onMouseMove={mousemove} onMouseLeave={mouseleave} className='rounded z-[999] hover:bg-transparent transition-all  cursor-pointer px-8  py-4 text-xl font-semibold inline-block text-white bg-blue-600' >
+    <div onMouseEnter={mouseenter} onMouseMove={mousemove} onMouseLeave={mouseleave} className='rounded z-[999] hover:bg-transparent transition-all  cursor-pointer px-10  py-4 text-xl font-semibold inline-block text-white bg-blue-600' >
       <div className='relative buttonspan z-[100]  block '>
         {children}
        
