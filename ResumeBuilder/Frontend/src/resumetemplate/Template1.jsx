@@ -37,7 +37,7 @@ const Template1 = ({
 
   return (
     <div
-      className={`w-6xl text-[var(--color-text)] font-sans min-h-screen flex flex-col  theme-${theme} bg-[var(--color-bg)] `}
+      className={`w-6xl mx-auto text-[var(--color-text)] font-sans min-h-screen flex flex-col  theme-${theme} bg-[var(--color-bg)] `}
     >
       <h1 className="text-3xl text-[var(--color-heading)] uppercase font-sans font-[500] tracking-tight">
         {Name ?? resumeDataDefault.Name}

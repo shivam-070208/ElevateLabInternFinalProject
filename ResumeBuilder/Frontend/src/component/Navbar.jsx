@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Logo from '../ui/Logo';
+
 import { Link } from 'react-router-dom';
+import { Logo } from '../ui';
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);

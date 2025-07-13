@@ -4,6 +4,7 @@ import { Template1, Template10, Template11, Template12, Template14, Template2, T
 import { Route, Routes } from 'react-router-dom'
 import Home from './routes/Home'
 import { Navbar } from './component'
+import { Cursor } from './ui'
 
 
 const App = () => {
@@ -14,12 +15,13 @@ const App = () => {
  
 
   return (
-    <div className='w-screen'>
+    <div className='w-screen z-0  relative'>
+      <Cursor />
     <Navbar />
-    {/* <Routes >
+    <Routes >
       <Route path='/' element={<Home/>}/>
-    </Routes> */}
-    <Template1 />
+    </Routes>
+  
     </div>
   )
 }
