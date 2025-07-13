@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from 'react'
-
+import gsap from 'gsap'
 const Cursor = () => {
     const cursorref = useRef(null)
-    let stopTimeout;
+    
 
   const mousemove = (e) => {
      
 
-      // Move the cursor
-      cursorref.current.style.top = `${e.clientY}px`;
-      cursorref.current.style.left = `${e.clientX}px`
+    gsap.to('.mouse',{
+        left:e.clientX,
+        top:e.clientY
+    })
   }
     
     useEffect(()=>{
@@ -20,7 +21,7 @@ const Cursor = () => {
         }
     },[cursorref])
   return (
-    <div ref={cursorref} className='fixed transition-all ease-linear duration-75  z-0 rounded-full pointer-events-none opacity-20  w-90 h-90 blur-xl  bg-blue-600 -translate-x-1/2 -translate-y-1/2' />
+    <div ref={cursorref} className='fixed -translate-x-1/2 -translate-y-1/2  mouse backdrop-blur-3xl z-100 transition-all ease-linear duration-75  rounded-full pointer-events-none w-4 h-4  bg-blue-600 origin-center' />
   )
 }
 

@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './routes/Home'
 import { Navbar } from './component'
 import { Cursor } from './ui'
+import Button from './ui/Button'
 
 
 const App = () => {
@@ -15,12 +16,13 @@ const App = () => {
  
 
   return (
-    <div className='w-screen z-0  relative'>
-      <Cursor />
+    <div className='w-screen   '>
     <Navbar />
     <Routes >
       <Route path='/' element={<Home/>}/>
     </Routes>
+      <Cursor />
+   
   
     </div>
   )
