@@ -17,11 +17,11 @@ const App = () => {
 
   return (
     <div className='w-screen   '>
+      <Cursor /> 
     <Navbar />
     <Routes >
       <Route path='/' element={<Home/>}/>
     </Routes>
-      <Cursor />
    
   
     </div>

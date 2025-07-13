@@ -13,11 +13,11 @@ const mouseenter = () => {
         scale: 8.0,
         ease: 'linear',
         duration: 0.1,
-        zIndex: -1
+        zIndex: 10
     });
 };
 
-const mouseleave = (e) => {
+const mouseleave = () => {
     if (!canHover) return;
     
     gsap.to('.mouse', {
@@ -26,6 +26,7 @@ const mouseleave = (e) => {
         duration: 0.1,
         x: '-50%',
         y: '-50%',
+        delay:0.2,
         zIndex: 999
     });
     gsap.to('.buttonspan', {
@@ -46,12 +47,12 @@ const mousemove = (e) => {
 
     gsap.to('.buttonspan', {
         translateX: lerpX * 50,
-        translateY: lerpY * 40
+        translateY: lerpY * 30
     });
 };
   return (
-    <div onMouseEnter={mouseenter} onMouseMove={mousemove} onMouseLeave={mouseleave} className='rounded  hover:bg-transparent transition-all  cursor-pointer px-8  py-4 text-xl font-semibold text-white bg-blue-600' >
-      <div className='relative buttonspan z-100 block '>
+    <div onMouseEnter={mouseenter} onMouseMove={mousemove} onMouseLeave={mouseleave} className='rounded z-[999] hover:bg-transparent transition-all  cursor-pointer px-8  py-4 text-xl font-semibold text-white bg-blue-600' >
+      <div className='sticky buttonspan z-[100] block '>
         {children}
        
         </div>
