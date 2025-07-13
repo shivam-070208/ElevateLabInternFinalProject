@@ -1,5 +1,5 @@
 
-import Heoicoverlay from "./Heoicoverlay";
+import Heoicoverlay from "./Heoricoverlay";
 import Heroic from "./Heroic";
 import Navbar from "./Navbar";
 import Features from "./Features";

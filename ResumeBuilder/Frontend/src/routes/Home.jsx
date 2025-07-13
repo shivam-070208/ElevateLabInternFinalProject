@@ -6,27 +6,36 @@ import HowItWorks from '../component/HowItWorks';
 import Templates from '../component/Templates';
 import Testimonials from '../component/Testimonials';
 import Footer from '../component/Footer';
-// Vendors
-// Vendors
-
+import LocomotiveScroll from 'locomotive-scroll';
+import { Cursor } from '../ui';
 
 
 
 
 
 const Home = () => {
-  
+  const scrollref = useRef(null);
+  useEffect(()=>{
+    if(!scrollref.current) return;
+
+    const loco = new LocomotiveScroll({
+      lenisOptions:{
+        wrapper:scrollref.current,
+        smoothWheel:true
+      }
+    })
+  },[scrollref])
 
   return (
-    <div  className='scroll-container' >
+    <div ref={scrollref} className='scroll-container' >
      
-
       <Heroic />
       <Features />
       <HowItWorks />
       <Templates />
       <Testimonials />
       <Footer />
+ <Cursor /> 
     
     </div>
    

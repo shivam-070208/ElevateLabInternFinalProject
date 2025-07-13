@@ -37,7 +37,7 @@ const HowItWorks = () => {
             trigger: sectionRef.current,
            top:'-40%',
            end:'bottom 30%',
-           toggleActions:'play none reverse play'
+           toggleActions:'play none none reverse'
            
           }
         }

@@ -1,7 +1,7 @@
 
 import React from 'react'
 import gsap from 'gsap'
-const Button =({children})=>{
+const Button =({children,id=null})=>{
  
 // Detect if the device supports hover (i.e., is not a touch device)
 const canHover = window.matchMedia('(hover: hover)').matches;
@@ -13,7 +13,7 @@ const mouseenter = () => {
         scale: 8.0,
         ease: 'linear',
         duration: 0.1,
-        zIndex: 10
+        zIndex: id?-1:2
     });
 };
 
@@ -46,13 +46,13 @@ const mousemove = (e) => {
     const lerpX = (e.clientX - endX) / rect.width;
 
     gsap.to('.buttonspan', {
-        translateX: lerpX * 50,
-        translateY: lerpY * 30
+        translateX: lerpX * 30,
+        translateY: lerpY * 10
     });
 };
   return (
-    <div onMouseEnter={mouseenter} onMouseMove={mousemove} onMouseLeave={mouseleave} className='rounded z-[999] hover:bg-transparent transition-all  cursor-pointer px-8  py-4 text-xl font-semibold text-white bg-blue-600' >
-      <div className='sticky buttonspan z-[100] block '>
+    <div onMouseEnter={mouseenter} onMouseMove={mousemove} onMouseLeave={mouseleave} className='rounded z-[999] hover:bg-transparent transition-all  cursor-pointer px-8  py-4 text-xl font-semibold inline-block text-white bg-blue-600' >
+      <div className='relative buttonspan z-[100]  block '>
         {children}
        
         </div>

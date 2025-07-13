@@ -5,7 +5,7 @@ import Button from '../ui/Button';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Heoicoverlay = () => {
+const Heroicoverlay = () => {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const buttonRef = useRef(null);
@@ -43,12 +43,9 @@ const Heoicoverlay = () => {
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
-      className="w-full bg-transparent relative h-full flex flex-col items-center justify-center text-center py-20 z-0 px-4"
-      data-scroll
-      data-scroll-speed="-0.5"
-    >
+   <>
+    
+    
       <h1 
         ref={titleRef} 
         className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight drop-shadow-lg heroic-title"
@@ -63,10 +60,10 @@ const Heoicoverlay = () => {
       </p>
       
       <div ref={buttonRef}>
-        <Button>Get Resume!</Button>
+        <Button id={1}>Get Resume!</Button>
       </div>
-    </div>
+    </>
   );
 };
 
-export default Heoicoverlay;
+export default Heroicoverlay;

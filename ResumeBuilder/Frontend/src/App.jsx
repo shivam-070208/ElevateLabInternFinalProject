@@ -5,19 +5,18 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './routes/Home'
 import { Navbar } from './component'
 import { Cursor } from './ui'
-import Button from './ui/Button'
+
 
 
 const App = () => {
   const resumeRef = useRef();
-  // You can replace this with your actual resumeData
-
-
  
+
+
 
   return (
     <div className='w-screen   '>
-      <Cursor /> 
+     
     <Navbar />
     <Routes >
       <Route path='/' element={<Home/>}/>
