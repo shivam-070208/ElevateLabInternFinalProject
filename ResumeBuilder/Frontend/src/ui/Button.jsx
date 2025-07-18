@@ -32,7 +32,10 @@ const mouseleave = () => {
     gsap.to('.buttonspan', {
         translateX: 0,
         translateY: 0,
-        ease: 'elastic.inOut'
+        ease:(e)=>{
+           
+            return e==1.0?e:e+Math.random()*0.29
+        }
     });
 };
 

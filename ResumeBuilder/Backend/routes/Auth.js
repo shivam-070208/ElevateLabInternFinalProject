@@ -1,14 +1,13 @@
-const route = require('express').Router();
-const dotenv = require('dotenv');
-const querystring = require('querystring');
-const axios = require('axios');
+const route = require("express").Router();
+const dotenv = require("dotenv");
+const querystring = require("querystring");
+const axios = require("axios");
+const jwt = require("jsonwebtoken");
 // Load environment variables first
 dotenv.config();
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = process.env.REDIRECT_URI;
-
-
 
 // Step 1: Redirect to Google Auth
 route.get("/google", (req, res) => {
@@ -18,7 +17,7 @@ route.get("/google", (req, res) => {
     response_type: "code",
     scope: "openid email profile",
     access_type: "offline",
-    prompt: "consent"
+    prompt: "consent",
   });
 
   res.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${qs}`);
@@ -37,32 +36,37 @@ route.get("/google/callback", async (req, res) => {
       client_id,
       client_secret,
       redirect_uri,
-      grant_type: "authorization_code"
+      grant_type: "authorization_code",
     });
 
     const { access_token, id_token } = tokenRes.data;
-    console.log(access_token,id_token);
+ 
     // Step 4: Use token to get user info
-    const userRes = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-      headers: {
-        Authorization: `Bearer ${access_token}`
+    const userRes = await axios.get(
+      "https://www.googleapis.com/oauth2/v3/userinfo",
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
       }
-    });
+    );
 
     const user = userRes.data;
-    console.log(user)
-    res.send(`
-      <h1>Welcome, ${user.name}</h1>
-      <p>Email: ${user.email}</p>
-      <img src="${user.picture}" />
-    `);
+    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET);
+    req.session.token = token;
+ res.send(`
+  <script>
+    window.opener.postMessage({ login: true }, 'http://localhost:5173');
+    window.close();
+  </script>
+`);
   } catch (err) {
-    console.error("Error during authentication:", err.response?.data || err.message);
+    console.error(
+      "Error during authentication:",
+      err.response?.data || err.message
+    );
     res.status(500).send("Authentication failed.");
   }
 });
-
-
-
 
 module.exports = route;

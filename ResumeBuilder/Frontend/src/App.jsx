@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './routes/Home'
 import { Navbar } from './component'
 import { Cursor } from './ui'
+import Sign from './routes/Sign'
 
 
 
@@ -22,6 +23,7 @@ const App = () => {
 
     <Routes >
       <Route path='/' element={<Home/>}/>
+       <Route path='/Sign' element={<Sign/>}/>
     </Routes>
     
    

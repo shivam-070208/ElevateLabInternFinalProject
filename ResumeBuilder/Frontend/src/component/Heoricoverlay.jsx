@@ -48,7 +48,7 @@ const Heroicoverlay = () => {
     
       <h1 
         ref={titleRef} 
-        className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight drop-shadow-lg heroic-title"
+        className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-10 tracking-tight leading-tight drop-shadow-lg heroic-title"
       
       >
         Build Your <span  className="text-blue-600">CV</span>
